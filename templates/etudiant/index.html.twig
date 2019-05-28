@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Etudiant index{% endblock %}
+
+{% block body %}
+    <h1>Etudiant index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Datenaiss</th>
+                <th>Lieunaiss</th>
+                <th>Adresse</th>
+                <th>Portable</th>
+                <th>Genre</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for etudiant in etudiants %}
+            <tr>
+                <td>{{ etudiant.id }}</td>
+                <td>{{ etudiant.prenom }}</td>
+                <td>{{ etudiant.nom }}</td>
+                <td>{{ etudiant.datenaiss }}</td>
+                <td>{{ etudiant.lieunaiss }}</td>
+                <td>{{ etudiant.adresse }}</td>
+                <td>{{ etudiant.portable }}</td>
+                <td>{{ etudiant.genre }}</td>
+                <td style="display:flex;flex-wrap:nowrap;justify-content:space-around;">
+                  <a href="{{ path('etudiant_show', {'id': etudiant.id}) }}" class="btn-floating btn-small waves-effect waves-light green"><i class="material-icons">visibility</i></a>
+                  <a href="{{ path('etudiant_edit', {'id': etudiant.id}) }}" class="btn-floating btn-small waves-effect waves-light blue"><i class="material-icons">edit</i></a>
+                                                    {{ include('etudiant/_delete_form.html.twig') }}
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">Pas de resultats</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large yellow" href="{{ path('etudiant_new') }}">
+    <i class="large material-icons">add</i>
+  </a>
+ 
+</div>{% endblock %}
